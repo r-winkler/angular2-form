@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
 import { EmployeeComponent } from './employee/employee.component';
+import { FormPoster } from './employee/employee.service';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,7 @@ import { EmployeeComponent } from './employee/employee.component';
     HttpModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: true })
   ],
-  providers: [
-
-  ],
+  providers: [FormPoster],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {

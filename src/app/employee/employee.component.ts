@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {Employee} from './employee.model';
+import {FormPoster} from './employee.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'employee',
@@ -19,6 +21,20 @@ export class EmployeeComponent {
     }
     
     hasPrimaryLanguageError = false;
+    
+    constructor(private formPoster: FormPoster) {
+    
+    }
+    
+    submitForm(form: NgForm) {
+        console.log(this.model);
+        console.log(form.value);
+        this.validatePrimaryLanguage(this.model.primaryLanguage);
+        if (this.hasPrimaryLanguageError)
+            return;
+        this.formPoster.postEmployeeForm(this.model);
+    }
+    
     validatePrimaryLanguage(value) {
         if (value === 'default') {
             this.hasPrimaryLanguageError = true;

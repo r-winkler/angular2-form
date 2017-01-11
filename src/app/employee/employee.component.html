@@ -1,6 +1,6 @@
 <div class="container">
     <h3>Employee Form</h3>
-    <form #form="ngForm" novalidate>
+    <form #form="ngForm" (submit)="submitForm(form)" novalidate>
         <div class="form-group" [class.has-error]="firstName.invalid && firstName.touched">
             <label for="firstNameId" class="control-label">First Name</label>
             <input #firstName="ngModel" id="firstNameId" pattern="...+" type="text" class="form-control" required placeholder="firstName" name="firstName" [(ngModel)]="model.firstName">
