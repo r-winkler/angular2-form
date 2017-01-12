@@ -9,7 +9,7 @@ import {NgForm} from '@angular/forms';
   templateUrl: './employee.component.html'
 })
 export class EmployeeComponent {
-    languages = ['German', 'English', 'Spanish', 'Other'];
+    languages = [];
     model = new Employee('René', 'Winkler', true, 'w2', 'default');
     
     
@@ -23,6 +23,11 @@ export class EmployeeComponent {
     hasPrimaryLanguageError = false;
     
     constructor(private formPoster: FormPoster) {
+        this.formPoster.getLanguages()
+            .subscribe(
+                data => this.languages = data.languages,
+                err => console.log('get error: ', err)
+            );
     
     }
     
@@ -32,7 +37,11 @@ export class EmployeeComponent {
         this.validatePrimaryLanguage(this.model.primaryLanguage);
         if (this.hasPrimaryLanguageError)
             return;
-        this.formPoster.postEmployeeForm(this.model);
+        this.formPoster.postEmployeeForm(this.model)
+            .subscribe(
+                data => console.log('success:', data),
+                err => console.log('error:', err)
+            );
     }
     
     validatePrimaryLanguage(value) {
